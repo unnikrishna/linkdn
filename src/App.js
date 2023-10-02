@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import Post from "./Post";
+import Comment from "./Comments";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
+import PostLive from "./PostLive";
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <div className="flex justify-around bg-[#F3F2EE] min-h-[100vh]">
+        <Sidebar />
+        <div className="w-[50%] mt-[20px]">
+          <Post />
+        </div>
+      </div>
     </div>
   );
 }
