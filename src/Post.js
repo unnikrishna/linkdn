@@ -31,37 +31,33 @@ const Post = ({}) => {
   const [post, setPosts] = useState([{ ...initialvalue }]);
   const [conter, setconter] = useState(0);
   const [value, setvalue] = useState("");
-  const handlePost = () => {
+  const handlePost = async() => {
     if (value) {
       const samp = { ...posts };
       samp.post = value;
+      await axios
+        .post("http://localhost:8000/comments", {})
+        .then()
+        .catch((err) => {
+          setTimeout(() => {
+            
+                samp.allComments = [
+                  {
+                    user: "WF",
+                    comment: "This is been taken care of",
+                  },
+                ];
+            
+          }, 500);
+        });
+
       setPosts((pre) => [samp, ...pre]);
       setvalue("");
       setconter(pre=> pre+1)
     }
   };
   useEffect(() => {
-    axios
-      .post("http://localhost:8000/comments", {})
-      .then()
-      .catch((err) => {
-        setTimeout(() => {
-          const newPost = post.map((p) => {
-            if (p.userid === 2) {
-              p.allComments = [
-                {
-                  user: "WF",
-                  comment: "This is been taken care of",
-                },
-              ];
-              return p;
-            }
-            return p;
-          });
-          setPosts([...newPost]);
-        }, 2000);
-        
-      });
+    
   }, [conter]);
   return (
     <>
